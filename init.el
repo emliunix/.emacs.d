@@ -15,7 +15,7 @@
      ("melpa" . "http://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (sicp shm flycheck-haskell flycheck rainbow-delimiters company-cabal company-web spaceline zenburn-theme xcscope syntax-subword swiper-helm solarized-theme projectile pretty-mode paredit mode-icons idle-highlight-mode helm-zhihu-daily helm-gtags haskell-snippets ggtags eyebrowse evalator emoji-cheat-sheet-plus emmet-mode electric-operator editorconfig company-math company-ghc auctex anaconda-mode)))
+    (yaml-mode sicp shm flycheck-haskell flycheck rainbow-delimiters company-cabal company-web spaceline zenburn-theme xcscope syntax-subword swiper-helm solarized-theme projectile pretty-mode paredit mode-icons idle-highlight-mode helm-zhihu-daily helm-gtags haskell-snippets ggtags eyebrowse evalator emoji-cheat-sheet-plus emmet-mode electric-operator editorconfig company-math company-ghc auctex anaconda-mode)))
  '(powerline-default-separator (quote wave))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)

@@ -54,10 +54,12 @@
 (add-hook 'TeX-mode-hook 'my-TeX-setup)
 
 ;; idle-highlight-mode
-(idle-highlight-mode 1)
+;; 并不能够自动开启，还是需要手动的打开，所以干脆不开了吧
+;(idle-highlight-mode 1)
 
 ;; pretty-mode
-(global-pretty-mode 1)
+;; 好像有点性能问题
+;(global-pretty-mode 1)
 
 ;; syntax-subword-mode
 (global-syntax-subword-mode 1)
@@ -79,3 +81,11 @@
 
 ;; rainbow-delimiters-mode
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+;; yaml mode
+;; 已经定义过了
+;(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+;(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+
+;; use ipython
+(setq python-shell-interpreter "ipython")
