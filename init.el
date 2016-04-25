@@ -11,11 +11,11 @@
  ;; If there is more than one, they won't work right.
  '(package-archives
    (quote
-    (("gnu" . "http://elpa.gnu.org/packages/")
-     ("melpa" . "http://melpa.org/packages/"))))
+    (("melpa" . "https://melpa.org/packages/")
+     ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (yaml-mode sicp shm flycheck-haskell flycheck rainbow-delimiters company-cabal company-web spaceline zenburn-theme xcscope syntax-subword swiper-helm solarized-theme projectile pretty-mode paredit mode-icons idle-highlight-mode helm-zhihu-daily helm-gtags haskell-snippets ggtags eyebrowse evalator emoji-cheat-sheet-plus emmet-mode electric-operator editorconfig company-math company-ghc auctex anaconda-mode)))
+    (geiser anaconda-mode auctex company-cabal company-ghc company-math company-web editorconfig electric-operator emmet-mode evalator eyebrowse flycheck-haskell ggtags haskell-snippets helm-gtags helm-zhihu-daily idle-highlight-mode mode-icons paredit pretty-mode projectile rainbow-delimiters shm sicp solarized-theme spaceline syntax-subword xcscope yaml-mode zenburn-theme)))
  '(powerline-default-separator (quote wave))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)

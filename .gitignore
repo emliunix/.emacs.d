@@ -1,4 +1,4 @@
-/elpa/*.txt
+/elpa/
 *~
 /auto-save-list/
 /anaconda-mode/

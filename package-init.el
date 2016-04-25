@@ -34,6 +34,10 @@
 ;; powerline
 (powerline-default-theme)
 
+;; haskell mode
+(eval-after-load "haskell-mode"
+  '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+
 ;; haskell-mode-hook
 (defun my-haskell-setup ()
   (haskell-doc-mode)
