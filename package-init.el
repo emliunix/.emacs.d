@@ -94,3 +94,7 @@
 ;; use ipython
 (setq python-shell-interpreter "ipython")
 
+;; git
+
+(add-to-list 'load-path (expand-file-name (concat user-emacs-directory "custom-pkgs/")))
+(require 'git)

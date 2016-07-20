@@ -15,7 +15,7 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (egg aria2 cider geiser anaconda-mode auctex company-cabal company-ghc company-math company-web editorconfig electric-operator emmet-mode evalator eyebrowse flycheck-haskell ggtags haskell-snippets helm-gtags helm-zhihu-daily idle-highlight-mode mode-icons paredit pretty-mode projectile rainbow-delimiters shm sicp solarized-theme spaceline syntax-subword xcscope yaml-mode zenburn-theme)))
+    (aria2 cider geiser anaconda-mode auctex company-cabal company-ghc company-math company-web editorconfig electric-operator emmet-mode evalator eyebrowse flycheck-haskell ggtags haskell-snippets helm-gtags helm-zhihu-daily idle-highlight-mode mode-icons paredit pretty-mode projectile rainbow-delimiters shm sicp solarized-theme spaceline syntax-subword xcscope yaml-mode zenburn-theme)))
  '(powerline-default-separator (quote wave))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
