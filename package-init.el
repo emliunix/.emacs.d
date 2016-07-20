@@ -93,3 +93,4 @@
 
 ;; use ipython
 (setq python-shell-interpreter "ipython")
+
