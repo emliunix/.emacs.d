@@ -82,6 +82,7 @@
   (enable-paredit-mode))
 
 (add-hook 'lisp-mode-hook 'my-lisp-setup)
+(add-hook 'clojure-mode-hook 'my-lisp-setup)
 
 ;; rainbow-delimiters-mode
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)

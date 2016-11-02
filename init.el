@@ -9,6 +9,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cider-repl-display-help-banner nil)
  '(package-archives
    (quote
     (("melpa" . "https://melpa.org/packages/")
@@ -27,7 +28,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Source Code Pro" :foundry "outline" :slant normal :weight normal :width normal)))))
+ '(default ((t (:family "Monaco" :foundry "outline" :slant normal :weight normal :width normal :height 98)))))
 
 
 (add-hook 'after-init-hook (lambda ()
@@ -43,3 +44,7 @@
 
 ;; eldoc mode
 (global-eldoc-mode 1)
+
+;; add .boot file to clojure auto mode list
+(add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
+(add-to-list 'magic-mode-alist '(".* boot" . clojure-mode))
