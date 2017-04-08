@@ -13,6 +13,11 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x c C-x C-f") 'find-file)
 
+;; bind helm-buffers-list to C-x C-b
+; C-x b suffice
+;(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+;(global-set-key (kbd "C-x c C-x C-b") 'buffer-list)
+
 ;; zenburn theme
 (load-theme 'zenburn t)
 
@@ -76,3 +81,12 @@
 ;; editorconfig
 (require 'editorconfig)
 (editorconfig-mode 1)
+;; yaml mode
+;; 已经定义过了
+;(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+;(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+
+;; git
+
+(add-to-list 'load-path (expand-file-name (concat user-emacs-directory "custom-pkgs/")))
+(require 'git)

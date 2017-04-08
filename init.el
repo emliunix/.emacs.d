@@ -9,15 +9,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(cider-repl-display-help-banner nil)
  '(package-archives
    (quote
     (("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
      ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))))
  '(package-selected-packages
    (quote
-    (syntax-subword shm racer company-racer rust-mode rustfmt markdown-mode markdown-mode+ cider geiser anaconda-mode auctex company-cabal company-ghc ghc flycheck-haskell haskell-snippets editorconfig emmet-mode ggtags helm-gtags paredit rainbow-delimiters xcscope yaml-mode zenburn-theme)))
- '(powerline-default-separator (quote wave))
+    (emmet-mode zenburn-theme helm helm-cider helm-ghc cider clojure-mode sml-mode company-racer flycheck-rust aria2 company-cabal company-ghc flycheck-haskell ggtags haskell-snippets idle-highlight-mode paredit rainbow-delimiters syntax-subword xcscope)))
+ '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(size-indication-mode t)
@@ -27,7 +26,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Source Code Pro" :foundry "ADBO" :slant normal :weight normal :width normal :height 120)))))
+ '(default ((t (:family "Source Code Pro" :foundry "outline" :slant normal :weight normal :width normal :height 98)))))
 
 
 (add-hook 'after-init-hook (lambda ()
@@ -64,3 +63,7 @@
 (defun open-package-init-file ()
   (interactive)
   (find-file "~/.emacs.d/package-init.el"))
+
+;; add .boot file to clojure auto mode list
+(add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
+(add-to-list 'magic-mode-alist '(".* boot" . clojure-mode))
