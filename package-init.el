@@ -1,16 +1,6 @@
 
 ;; company mode backends
 (global-company-mode)
-(add-to-list 'company-backends 'company-ghc)
-(add-to-list 'company-backends 'company-math-symbols-unicode)
-
-;; smex
-;(require 'smex)
-;(smex-initialize)
-;
-;(global-set-key (kbd "M-x") 'smex)
-;(global-set-key (kbd "M-x") 'smex-major-mode-commands)
-;(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)))
 
 ;; helm
 (require 'helm-config)
@@ -30,9 +20,6 @@
 
 ;; zenburn theme
 (load-theme 'zenburn t)
-
-;; powerline
-(powerline-default-theme)
 
 ;; haskell mode
 (eval-after-load "haskell-mode"
@@ -66,7 +53,7 @@
 ;(global-pretty-mode 1)
 
 ;; syntax-subword-mode
-(global-syntax-subword-mode 1)
+(global-syntax-subword-mode t)
 
 ;; emmet
 (defun my-html-setup ()

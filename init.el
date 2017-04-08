@@ -12,12 +12,11 @@
  '(cider-repl-display-help-banner nil)
  '(package-archives
    (quote
-    (("melpa" . "https://melpa.org/packages/")
-     ("gnu" . "http://elpa.gnu.org/packages/"))))
+    (("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+     ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))))
  '(package-selected-packages
    (quote
-    (aria2 cider geiser anaconda-mode auctex company-cabal company-ghc company-math company-web editorconfig electric-operator emmet-mode evalator eyebrowse flycheck-haskell ggtags haskell-snippets helm-gtags helm-zhihu-daily idle-highlight-mode mode-icons paredit pretty-mode projectile rainbow-delimiters shm sicp solarized-theme spaceline syntax-subword xcscope yaml-mode zenburn-theme)))
- '(powerline-default-separator (quote wave))
+    (emmet-mode zenburn-theme helm helm-cider helm-ghc cider clojure-mode sml-mode company-racer flycheck-rust aria2 company-cabal company-ghc flycheck-haskell ggtags haskell-snippets idle-highlight-mode paredit rainbow-delimiters syntax-subword xcscope)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -28,7 +27,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Monaco" :foundry "outline" :slant normal :weight normal :width normal :height 98)))))
+ '(default ((t (:family "Source Code Pro" :foundry "outline" :slant normal :weight normal :width normal :height 98)))))
 
 
 (add-hook 'after-init-hook (lambda ()
@@ -37,7 +36,7 @@
 (show-paren-mode 1)
 ;; SubWord mode
 ; use syntax-subword instead
-;(global-subword-mode 1)
+(global-subword-mode 1)
 
 ;; electric pair mode
 (electric-pair-mode 1)
