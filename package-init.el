@@ -1,4 +1,4 @@
-
+b
 ;; company mode backends
 (global-company-mode)
 
@@ -90,3 +90,6 @@
 
 (add-to-list 'load-path (expand-file-name (concat user-emacs-directory "custom-pkgs/")))
 (require 'git)
+
+;; ocaml utop
+(autoload 'utop "~/.emacs.d/utop.el" "Toplevel for OCaml" t)
