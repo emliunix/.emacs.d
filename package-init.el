@@ -1,4 +1,4 @@
-b
+
 ;; company mode backends
 (global-company-mode)
 
@@ -19,7 +19,7 @@ b
 ;(global-set-key (kbd "C-x c C-x C-b") 'buffer-list)
 
 ;; zenburn theme
-(load-theme 'zenburn t)
+;; (load-theme 'zenburn t)
 
 ;; haskell mode
 (eval-after-load "haskell-mode"
@@ -79,8 +79,8 @@ b
 (cscope-setup)
 
 ;; editorconfig
-(require 'editorconfig)
-(editorconfig-mode 1)
+;; (require 'editorconfig)
+;; (editorconfig-mode 1)
 ;; yaml mode
 ;; 已经定义过了
 ;(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
