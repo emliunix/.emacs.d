@@ -15,7 +15,7 @@
      ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))))
  '(package-selected-packages
    (quote
-    (markdown-mode+ tuareg projectile emmet-mode zenburn-theme helm helm-cider helm-ghc cider clojure-mode sml-mode company-racer flycheck-rust aria2 company-cabal company-ghc flycheck-haskell ggtags haskell-snippets idle-highlight-mode paredit rainbow-delimiters syntax-subword xcscope)))
+    (elpy markdown-mode+ tuareg projectile emmet-mode zenburn-theme helm helm-cider helm-ghc cider clojure-mode sml-mode company-racer flycheck-rust aria2 company-cabal company-ghc flycheck-haskell ggtags haskell-snippets idle-highlight-mode paredit rainbow-delimiters syntax-subword xcscope)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
