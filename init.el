@@ -16,7 +16,7 @@
      ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))))
  '(package-selected-packages
    (quote
-    (toml-mode markdown-mode elpy helm-projectile projectile projectile-codesearch projectile-direnv projectile-sift projectile-speedbar anaconda-mode emmet-mode zenburn-theme helm helm-cider helm-ghc cider clojure-mode sml-mode company-racer flycheck-rust aria2 company-cabal company-ghc flycheck-haskell ggtags haskell-snippets idle-highlight-mode paredit rainbow-delimiters syntax-subword xcscope yaml-mode racer markdown-mode+ geiser auctex rust-mode)))
+    (toml-mode markdown-mode+ elpy helm-projectile projectile projectile-codesearch projectile-direnv projectile-sift projectile-speedbar emmet-mode zenburn-theme helm helm-cider helm-ghc cider clojure-mode sml-mode company-racer flycheck-rust aria2 company-cabal company-ghc flycheck-haskell ggtags haskell-snippets idle-highlight-mode paredit rainbow-delimiters syntax-subword xcscope yaml-mode geiser auctex racer rust-mode)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -33,17 +33,23 @@
 (add-hook 'after-init-hook (lambda ()
 			     (load "~/.emacs.d/package-init.el")))
 
+;; elpa mirror backup in case tuna is not accessible
+;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+;;                          ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+
 ;; ocaml mode
-(add-to-list 'load-path  "~/.emacs.d/caml-mode/")
+;; (add-to-list 'load-path  "~/.emacs.d/caml-mode/")
 
-(add-to-list 'auto-mode-alist '("\\.ml[iylp]?$" . caml-mode))
-(autoload 'caml-mode "caml" "Major mode for editing OCaml code." t)
-(autoload 'run-caml "inf-caml" "Run an inferior OCaml process." t)
-(autoload 'camldebug "camldebug" "Run ocamldebug on program." t)
-(add-to-list 'interpreter-mode-alist '("ocamlrun" . caml-mode))
-(add-to-list 'interpreter-mode-alist '("ocaml" . caml-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ml[iylp]?$" . caml-mode))
+;; (autoload 'caml-mode "caml" "Major mode for editing OCaml code." t)
+;; (autoload 'run-caml "inf-caml" "Run an inferior OCaml process." t)
+;; (autoload 'camldebug "camldebug" "Run ocamldebug on program." t)
+;; (add-to-list 'interpreter-mode-alist '("ocamlrun" . caml-mode))
+;; (add-to-list 'interpreter-mode-alist '("ocaml" . caml-mode))
 
-(if window-system (require 'caml-font))
+;; (if window-system (require 'caml-font))
+
+;; end ocaml mode
 
 ;; highlight parenthesis
 (show-paren-mode 1)

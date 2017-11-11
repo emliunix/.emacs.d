@@ -19,7 +19,7 @@
 ;(global-set-key (kbd "C-x c C-x C-b") 'buffer-list)
 
 ;; zenburn theme
-(load-theme 'zenburn t)
+;; (load-theme 'zenburn t)
 
 ;; haskell mode
 (eval-after-load "haskell-mode"
@@ -93,3 +93,36 @@
 
 ;; projectile
 (projectile-mode)
+
+;; OCaml setup
+;; (autoload 'utop "~/.emacs.d/utop.el" "Toplevel for OCaml" t)
+(let ((opam-exe (executable-find "opam")))
+  (when opam-exe
+    (print (concat "Found opam: " opam-exe))
+    (let* ((share-dir (car (process-lines "opam" "config" "var" "share")))
+	   (merlin-el-path (concat share-dir "/emacs/site-lisp/merlin.el"))
+	   (utop-el-path (concat share-dir "/emacs/site-lisp/utop.el"))
+	   (caml-el-path (concat share-dir "/emacs/site-lisp/caml.el"))
+	   (tuareg-site-file-el-path (concat share-dir "/emacs/site-lisp/tuareg-site-file.el")))
+      ;; add emacs site-lisp in opam share directory
+      (push (concat share-dir "/emacs/site-lisp") load-path)
+      ;; (print (concat "merlin.el " merlin-el-path))
+      ;; (print (concat "utop.el " utop-el-path))
+      (when (file-exists-p merlin-el-path)
+	;; load merlin
+	(print (concat "merlin.el found: " merlin-el-path))
+	(setq merlin-command 'opam)
+	(autoload 'merlin-mode "merlin" "Merlin mode" t)
+	(add-hook 'tuareg-mode-hook 'merlin-mode))
+      (when (file-exists-p utop-el-path)
+	;; load utop
+	(print (concat "utop.el found: " utop-el-path))
+	(autoload 'utop "utop.el" "Toplevel for OCaml" t))
+      (when (file-exists-p caml-el-path)
+	;; load caml mode
+	(print (concat "caml.el found: " caml-el-path))
+	(autoload 'caml "caml.el" "Caml mode" t))
+      (when (file-exists-p tuareg-site-file-el-path)
+	;; load tuareg
+	(print (concat "tuareg-site-file.el found: " tuareg-site-file-el-path))
+	(load tuareg-site-file-el-path)))))
