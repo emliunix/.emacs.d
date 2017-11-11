@@ -9,13 +9,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(indent-tabs-mode nil)
  '(package-archives
    (quote
     (("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
      ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))))
  '(package-selected-packages
    (quote
-    (emmet-mode zenburn-theme helm helm-cider helm-ghc cider clojure-mode sml-mode company-racer flycheck-rust aria2 company-cabal company-ghc flycheck-haskell ggtags haskell-snippets idle-highlight-mode paredit rainbow-delimiters syntax-subword xcscope)))
+    (toml-mode markdown-mode elpy helm-projectile projectile projectile-codesearch projectile-direnv projectile-sift projectile-speedbar anaconda-mode emmet-mode zenburn-theme helm helm-cider helm-ghc cider clojure-mode sml-mode company-racer flycheck-rust aria2 company-cabal company-ghc flycheck-haskell ggtags haskell-snippets idle-highlight-mode paredit rainbow-delimiters syntax-subword xcscope yaml-mode racer markdown-mode+ geiser auctex rust-mode)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -26,7 +27,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Source Code Pro" :foundry "ADBO" :slant normal :weight normal :width normal :height 120)))))
+ '(default ((t (:family "IosevkaCC" :foundry "CYEL" :slant normal :weight normal :width normal :height 120)))))
 
 
 (add-hook 'after-init-hook (lambda ()
