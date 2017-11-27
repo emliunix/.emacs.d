@@ -19,11 +19,9 @@
 ;(global-set-key (kbd "C-x c C-x C-b") 'buffer-list)
 
 ;; zenburn theme
-(load-theme 'zenburn t)
-
-;; haskell mode
-(eval-after-load "haskell-mode"
-  '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+;; load theme when using GUI
+(if window-system
+  (load-theme 'zenburn t))
 
 ;; haskell-mode-hook
 (defun my-haskell-setup ()
@@ -32,10 +30,11 @@
   (haskell-indentation-mode)
   (structured-haskell-mode)
   (ghc-init)
+  (define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile)
   (setq-local company-backends
 	      (append '(company-ghc)
 		      company-backends)))
-  
+
 (add-hook 'haskell-mode-hook 'my-haskell-setup)
 
 ;; AucTeX mode company-math
@@ -68,19 +67,21 @@
 (add-hook 'emacs-lisp-mode-hook 'my-lisp-setup)
 (add-hook 'cider-repl-mode-hook (lambda () (enable-paredit-mode)))
 
+;; add .boot file to clojure auto mode list
+(add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
+(add-to-list 'magic-mode-alist '(".* boot" . clojure-mode))
+
 ;; rainbow-delimiters-mode
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ;; use ipython
 (setq python-shell-interpreter "ipython")
+(setq python-shell-interpreter-args  "-i --simple-prompt")
 
 ;; cscope
 (require 'xcscope)
 (cscope-setup)
 
-;; editorconfig
-(require 'editorconfig)
-(editorconfig-mode 1)
 ;; yaml mode
 ;; 已经定义过了
 ;(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
@@ -90,3 +91,19 @@
 
 (add-to-list 'load-path (expand-file-name (concat user-emacs-directory "custom-pkgs/")))
 (require 'git)
+
+;; anaconda-mode (python)
+;; (add-hook 'python-mode-hook 'anaconda-mode)
+;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+(defun flycheck-py-setup ()
+  (when python-shell-virtualenv-root
+    (let ((pylint-path (executable-find "pylint"))
+	  (flake8-path (executable-find "flake8")))
+      (when pylint-path
+	(setq flycheck-python-pylint-executable pylint-path))
+      (when flake8-path
+	(setq flycheck-python-flake8-executable flake8-path)))))
+
+(add-hook 'python-mode-hook 'flycheck-mode)
+
+(add-hook 'flycheck-mode-hook 'flycheck-py-setup)
