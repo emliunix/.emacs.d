@@ -141,8 +141,13 @@
       (when (file-exists-p caml-el-path)
 	;; load caml mode
 	(print (concat "caml.el found: " caml-el-path))
-	(autoload 'caml "caml.el" "Caml mode" t))
+	(autoload 'caml "caml.el" "Caml mode" t)
+        (if window-system (require 'caml-font)))
       (when (file-exists-p tuareg-site-file-el-path)
 	;; load tuareg
 	(print (concat "tuareg-site-file.el found: " tuareg-site-file-el-path))
 	(load tuareg-site-file-el-path)))))
+
+
+;; Proof General
+(load-file (concat user-emacs-directory "/lisp/PG/generic/proof-site.el"))

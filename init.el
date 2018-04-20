@@ -31,7 +31,7 @@
 
 
 (add-hook 'after-init-hook (lambda ()
-			     (load "~/.emacs.d/package-init.el")))
+			     (load (concat user-emacs-directory "/package-init.el"))))
 
 ;; elpa mirror backup in case tuna is not accessible
 ;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
@@ -65,9 +65,9 @@
 
 (defun open-init-file ()
   (interactive)
-  (find-file "~/.emacs.d/init.el"))
+  (find-file (concat user-emacs-directory "/init.el")))
 
 (defun open-package-init-file ()
   (interactive)
-  (find-file "~/.emacs.d/package-init.el"))
+  (find-file (concat user-emacs-directory "/package-init.el")))
 
