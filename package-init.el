@@ -24,18 +24,19 @@
   (load-theme 'zenburn t))
 
 ;; haskell-mode-hook
-(defun my-haskell-setup ()
-  (haskell-doc-mode)
-  (interactive-haskell-mode +1)
-  (haskell-indentation-mode)
-  (structured-haskell-mode)
-  (ghc-init)
-  (define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile)
-  (setq-local company-backends
-	      (append '(company-ghc)
-		      company-backends)))
+(intero-global-mode 1)
+;; (defun my-haskell-setup ()
+;;   (haskell-doc-mode)
+;;   (interactive-haskell-mode +1)
+;;   (haskell-indentation-mode)
+;;   (structured-haskell-mode)
+;;   (ghc-init)
+;;   (define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile)
+;;   (setq-local company-backends
+;; 	      (append '(company-ghc)
+;; 		      company-backends)))
 
-(add-hook 'haskell-mode-hook 'my-haskell-setup)
+;; (add-hook 'haskell-mode-hook 'my-haskell-setup)
 
 ;; AucTeX mode company-math
 (defun my-TeX-setup ()
@@ -99,7 +100,7 @@
 ;; (add-hook 'python-mode-hook 'anaconda-mode)
 ;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 (defun flycheck-py-setup ()
-  (when python-shell-virtualenv-root
+  (when (boundp 'python-shell-virtualenv-root)
     (let ((pylint-path (executable-find "pylint"))
 	  (flake8-path (executable-find "flake8")))
       (when pylint-path
@@ -108,7 +109,6 @@
 	(setq flycheck-python-flake8-executable flake8-path)))))
 
 (add-hook 'python-mode-hook 'flycheck-mode)
-
 (add-hook 'flycheck-mode-hook 'flycheck-py-setup)
 
 ;; projectile
@@ -150,4 +150,4 @@
 
 
 ;; Proof General
-(load-file (concat user-emacs-directory "/lisp/PG/generic/proof-site.el"))
+(load-file (concat user-emacs-directory "lisp/PG/generic/proof-site.el"))

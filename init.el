@@ -9,6 +9,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default)))
+ '(frame-background-mode (quote dark))
  '(indent-tabs-mode nil)
  '(package-archives
    (quote
@@ -16,22 +20,17 @@
      ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))))
  '(package-selected-packages
    (quote
-    (aria2 auctex cider clojure-mode company-cabal company-ghc company-racer dockerfile-mode elpy emmet-mode flycheck-haskell flycheck-rust geiser ggtags haskell-snippets helm helm-cider helm-ghc helm-projectile idle-highlight-mode intero json-mode markdown-mode+ paredit projectile projectile-codesearch projectile-direnv projectile-sift projectile-speedbar racer rainbow-delimiters rust-mode sml-mode syntax-subword toml-mode xcscope yaml-mode zenburn-theme)))
+    (pretty-mode helm-idris idris-mode restclient restclient-helm aria2 auctex cider clojure-mode company-cabal company-ghc company-racer dockerfile-mode elpy emmet-mode flycheck-haskell flycheck-rust geiser ggtags haskell-snippets helm helm-cider helm-ghc helm-projectile idle-highlight-mode intero json-mode markdown-mode+ paredit projectile projectile-codesearch projectile-direnv projectile-sift projectile-speedbar racer rainbow-delimiters rust-mode sml-mode syntax-subword toml-mode xcscope yaml-mode zenburn-theme)))
+ '(projectile-completion-system (quote helm))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "等距更纱黑体 SC" :foundry "CYEL" :slant normal :weight normal :width normal :height 120)))))
 
-
-(add-hook 'after-init-hook (lambda ()
-			     (load (concat (file-name-as-directory user-emacs-directory) "package-init.el"))))
+(add-hook 'after-init-hook
+          (lambda ()
+            (load (concat (file-name-as-directory user-emacs-directory) "package-init.el"))))
 
 ;; elpa mirror backup in case tuna is not accessible
 ;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
@@ -53,15 +52,16 @@
 
 ;; highlight parenthesis
 (show-paren-mode 1)
-;; SubWord mode
 ; use syntax-subword instead
 (global-subword-mode 1)
-
 ;; electric pair mode
 (electric-pair-mode 1)
-
 ;; eldoc mode
 (global-eldoc-mode 1)
+;; global-hl-line-mode
+(global-hl-line-mode 1)
+;; savehist
+(savehist-mode 1)
 
 (defun open-init-file ()
   (interactive)
