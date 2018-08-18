@@ -28,9 +28,17 @@
  '(size-indication-mode t)
  '(tool-bar-mode nil))
 
+(let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
+  (when (file-exists-p file-custom-el)
+    (load file-custom-el)
+    (when (boundp 'my-custom-variables)
+      (apply custom-set-variables my-custom-variables))
+    (when (boundp 'my-custom-faces)
+      (apply custom-set-faces my-custom-faces))))
+
 (add-hook 'after-init-hook
           (lambda ()
-            (load (concat (file-name-as-directory user-emacs-directory) "package-init.el"))))
+	    (load (concat (file-name-as-directory user-emacs-directory) "package-init.el"))))
 
 ;; elpa mirror backup in case tuna is not accessible
 ;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
