@@ -80,6 +80,9 @@
 (setq python-shell-interpreter "ipython")
 (setq python-shell-interpreter-args  "-i --simple-prompt")
 
+;; python
+(elpy-enable)
+
 ;; cscope
 (require 'xcscope)
 (cscope-setup)
@@ -119,35 +122,39 @@
 ;; (autoload 'utop "~/.emacs.d/utop.el" "Toplevel for OCaml" t)
 (let ((opam-exe (executable-find "opam")))
   (when opam-exe
-    (print (concat "Found opam: " opam-exe))
-    (let* ((share-dir (car (process-lines "opam" "config" "var" "share")))
-	   (merlin-el-path (concat share-dir "/emacs/site-lisp/merlin.el"))
-	   (utop-el-path (concat share-dir "/emacs/site-lisp/utop.el"))
-	   (caml-el-path (concat share-dir "/emacs/site-lisp/caml.el"))
-	   (tuareg-site-file-el-path (concat share-dir "/emacs/site-lisp/tuareg-site-file.el")))
-      ;; add emacs site-lisp in opam share directory
-      (push (concat share-dir "/emacs/site-lisp") load-path)
-      ;; (print (concat "merlin.el " merlin-el-path))
-      ;; (print (concat "utop.el " utop-el-path))
-      (when (file-exists-p merlin-el-path)
-	;; load merlin
-	(print (concat "merlin.el found: " merlin-el-path))
-	(setq merlin-command 'opam)
-	(autoload 'merlin-mode "merlin" "Merlin mode" t)
-	(add-hook 'tuareg-mode-hook 'merlin-mode))
-      (when (file-exists-p utop-el-path)
-	;; load utop
-	(print (concat "utop.el found: " utop-el-path))
-	(autoload 'utop "utop.el" "Toplevel for OCaml" t))
-      (when (file-exists-p caml-el-path)
-	;; load caml mode
-	(print (concat "caml.el found: " caml-el-path))
-	(autoload 'caml "caml.el" "Caml mode" t)
-        (if window-system (require 'caml-font)))
-      (when (file-exists-p tuareg-site-file-el-path)
-	;; load tuareg
-	(print (concat "tuareg-site-file.el found: " tuareg-site-file-el-path))
-	(load tuareg-site-file-el-path)))))
+    (message "Found opam: %s" opam-exe)
+    (condition-case err
+        (let* ((share-dir (file-name-as-directory (car (process-lines "opam" "config" "var" "share"))))
+               (site-dir (file-name-as-directory (concat share-dir "emacs/site-lisp")))
+	       (merlin-el-path (concat site-dir "merlin.el"))
+	       (utop-el-path (concat site-dir "utop.el"))
+	       (caml-el-path (concat site-dir "caml.el"))
+	       (tuareg-site-file-el-path (concat site-dir "tuareg-site-file.el")))
+          ;; add emacs site-lisp in opam share directory
+          (when (file-exists-p site-dir)
+            (push site-dir load-path)
+            ;; (print (concat "merlin.el " merlin-el-path))
+            ;; (print (concat "utop.el " utop-el-path))
+            (when (file-exists-p merlin-el-path)
+	      ;; load merlin
+              (message "merlin.el found: %s" merlin-el-path)
+	      (setq merlin-command 'opam)
+	      (autoload 'merlin-mode "merlin" "Merlin mode" t)
+	      (add-hook 'tuareg-mode-hook 'merlin-mode))
+            (when (file-exists-p utop-el-path)
+	      ;; load utop
+              (message "utop.el found: %s" utop-el-path)
+	      (autoload 'utop "utop.el" "Toplevel for OCaml" t))
+            (when (file-exists-p caml-el-path)
+	      ;; load caml mode
+              (message "caml.el found: %s" caml-el-path)
+	      (autoload 'caml "caml.el" "Caml mode" t)
+              (if window-system (require 'caml-font)))
+            (when (file-exists-p tuareg-site-file-el-path)
+	      ;; load tuareg
+              (message "tuareg-site-file.el found: %s" tuareg-site-file-el-path)
+	      (load tuareg-site-file-el-path))))
+        (error (message "Failed initializing OCaml env: %s: %s" (car err) (cdr err))))))
 
 
 ;; Proof General
