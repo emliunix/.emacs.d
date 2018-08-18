@@ -151,4 +151,4 @@
 
 
 ;; Proof General
-(load-file (concat user-emacs-directory "lisp/PG/generic/proof-site.el"))
+(load-file (concat (file-name-as-directory user-emacs-directory) "lisp/PG/generic/proof-site.el"))
