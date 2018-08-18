@@ -28,13 +28,10 @@
  '(size-indication-mode t)
  '(tool-bar-mode nil))
 
+;; load user customs
 (let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
   (when (file-exists-p file-custom-el)
-    (load file-custom-el)
-    (when (boundp 'my-custom-variables)
-      (apply custom-set-variables my-custom-variables))
-    (when (boundp 'my-custom-faces)
-      (apply custom-set-faces my-custom-faces))))
+    (load file-custom-el)))
 
 (add-hook 'after-init-hook
           (lambda ()

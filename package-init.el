@@ -1,3 +1,4 @@
+(message "loading package inits")
 
 ;; company mode backends
 (global-company-mode)
