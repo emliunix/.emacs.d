@@ -11,16 +11,17 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default)))
+    ("a7051d761a713aaf5b893c90eaba27463c791cd75d7257d3a8e66b0c8c346e77" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default)))
  '(frame-background-mode (quote dark))
  '(indent-tabs-mode nil)
+ '(lsp-rust-server (quote rust-analyzer))
  '(package-archives
    (quote
-    (("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-     ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))))
+    (("melpa" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+     ("gnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))))
  '(package-selected-packages
    (quote
-    (pretty-mode helm-idris idris-mode restclient restclient-helm aria2 auctex cider clojure-mode company-cabal company-ghc company-racer dockerfile-mode elpy emmet-mode flycheck-haskell flycheck-rust geiser ggtags haskell-snippets helm helm-cider helm-ghc helm-projectile idle-highlight-mode intero json-mode markdown-mode+ paredit projectile projectile-codesearch projectile-direnv projectile-sift projectile-speedbar racer rainbow-delimiters rust-mode sml-mode syntax-subword toml-mode xcscope yaml-mode zenburn-theme)))
+    (lsp-mode lsp-python-ms lsp-ui pretty-mode helm-idris idris-mode restclient restclient-helm auctex cider clojure-mode company-cabal company-ghc dockerfile-mode emmet-mode flycheck-haskell geiser ggtags haskell-snippets helm helm-cider helm-ghc helm-projectile idle-highlight-mode intero json-mode markdown-mode+ paredit projectile rainbow-delimiters rust-mode sml-mode syntax-subword toml-mode xcscope yaml-mode zenburn-theme)))
  '(projectile-completion-system (quote helm))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
@@ -29,9 +30,9 @@
  '(tool-bar-mode nil))
 
 ;; load user customs
-(let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
-  (when (file-exists-p file-custom-el)
-    (load file-custom-el)))
+;; (let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
+;;   (when (file-exists-p file-custom-el)
+;;     (load file-custom-el)))
 
 (add-hook 'after-init-hook
           (lambda ()
