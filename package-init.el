@@ -77,11 +77,11 @@
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ;; use ipython
-(setq python-shell-interpreter "ipython")
-(setq python-shell-interpreter-args  "-i --simple-prompt")
+;; (setq python-shell-interpreter "ipython")
+;; (setq python-shell-interpreter-args  "-i --simple-prompt")
 
 ;; python
-(elpy-enable)
+;; (elpy-enable)
 
 ;; cscope
 (require 'xcscope)
@@ -159,3 +159,12 @@
 
 ;; Proof General
 (load-file (concat (file-name-as-directory user-emacs-directory) "lisp/PG/generic/proof-site.el"))
+
+;; lsp
+(require 'lsp-mode)
+(add-hook 'rust-mode-hook #'lsp-deferred)
+(add-hook 'python-mode-hook #'lsp-deferred)
+
+;; yasnippet
+(require 'yasnippet)
+(yas-global-mode t)
