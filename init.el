@@ -11,10 +11,13 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("a7051d761a713aaf5b893c90eaba27463c791cd75d7257d3a8e66b0c8c346e77" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default)))
+    ("76c5b2592c62f6b48923c00f97f74bcb7ddb741618283bdb2be35f3c0e1030e3" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default)))
  '(frame-background-mode (quote dark))
  '(indent-tabs-mode nil)
+ '(lsp-keymap-prefix "c-c l")
+ '(lsp-rust-analyzer-server-display-inlay-hints t)
  '(lsp-rust-server (quote rust-analyzer))
+ '(lsp-semantic-highlighting :deferred)
  '(package-archives
    (quote
     (("melpa" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
@@ -25,6 +28,7 @@
  '(projectile-completion-system (quote helm))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
+ '(shell-file-name "/bin/zsh")
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil))

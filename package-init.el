@@ -158,7 +158,10 @@
 
 
 ;; Proof General
-(load-file (concat (file-name-as-directory user-emacs-directory) "lisp/PG/generic/proof-site.el"))
+(let ((pg-site-file (concat (file-name-as-directory user-emacs-directory) "lisp/PG/generic/proof-site.el")))
+  (when (file-exists-p pg-site-file)
+    (message "proof-site.el found: %s" pg-site-file)
+    (load-file pg-site-file)))
 
 ;; lsp
 (require 'lsp-mode)
