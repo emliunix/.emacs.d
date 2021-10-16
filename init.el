@@ -1,27 +1,11 @@
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
-
-(custom-set-variables
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes '("ad5ba75e4e68800b50e9ac5557439ec749c2cfa86a8d024d5c1a31183d864dbf"))
- '(frame-background-mode 'dark)
- '(history-delete-duplicates t)
- '(lsp-haskell-process-path-hie "haskell-language-server-wrapper-Linux")
- '(lsp-keymap-prefix "C-c l")
- '(lsp-rust-analyzer-server-command '("~/.local/bin/rust-analyzer "))
- '(lsp-rust-analyzer-server-display-inlay-hints t)
- '(lsp-rust-server 'rust-analyzer)
- '(lsp-semantic-highlighting :deferred)
- '(package-archives '(("melpa" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") ("gnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
- '(ring-bell-function 'ignore)
- '(show-paren-mode t)
- '(size-indication-mode t))
 
 (add-hook 'after-init-hook (lambda ()
 			     (require 'package-init)
@@ -48,3 +32,22 @@
 (add-hook 'after-init-hook
 	  (lambda ()
 	    (load-theme 'zenburn)))
+
+(add-to-list 'load-path (concat (file-name-as-directory user-emacs-directory) "idris2-mode"))
+(require 'idris2-mode)
+
+;; (add-to-list 'load-path "~/play/nix-mode/")
+;; (require 'nix-mode)
+
+;; lsp idris2
+(require 'lsp-mode)
+;; (add-to-list 'lsp-language-id-configuration '(idris2-mode . "idris2"))
+;; (lsp-register-client
+;;  (make-lsp-client :new-connection (lsp-stdio-connection
+;; 				   "/home/YuhuiLiu/play/idris2-lsp/build/exec/idris2-lsp-wrapped.sh")
+;; 		  :activation-fn (lsp-activate-on "idris2")
+;; 		  :server-id 'idris2-lsp))
+
+;; emoji
+(when window-system
+    (set-fontset-font t 'symbol "Noto Color Emoji"))
