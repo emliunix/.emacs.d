@@ -25,7 +25,7 @@
   (load-theme 'zenburn t))
 
 ;; haskell-mode-hook
-(intero-global-mode 1)
+;; (intero-global-mode 1)
 ;; (defun my-haskell-setup ()
 ;;   (haskell-doc-mode)
 ;;   (interactive-haskell-mode +1)
@@ -64,14 +64,14 @@
   (enable-paredit-mode))
 
 (add-hook 'lisp-mode-hook 'my-lisp-setup)
-(add-hook 'clojure-mode-hook 'my-lisp-setup)
+;; (add-hook 'clojure-mode-hook 'my-lisp-setup)
 (add-hook 'scheme-mode-hook 'my-lisp-setup)
 (add-hook 'emacs-lisp-mode-hook 'my-lisp-setup)
-(add-hook 'cider-repl-mode-hook (lambda () (enable-paredit-mode)))
+;; (add-hook 'cider-repl-mode-hook (lambda () (enable-paredit-mode)))
 
 ;; add .boot file to clojure auto mode list
-(add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
-(add-to-list 'magic-mode-alist '(".* boot" . clojure-mode))
+;; (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
+;; (add-to-list 'magic-mode-alist '(".* boot" . clojure-mode))
 
 ;; rainbow-delimiters-mode
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
@@ -84,21 +84,16 @@
 ;; (elpy-enable)
 
 ;; cscope
-(require 'xcscope)
-(cscope-setup)
+;; (require 'xcscope)
+;; (cscope-setup)
 
 ;; editorconfig
 ;; (require 'editorconfig)
 ;; (editorconfig-mode 1)
 
 ;; yaml mode
-;; 已经定义过了
 ;(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 ;(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
-
-;; git
-(add-to-list 'load-path (expand-file-name (concat user-emacs-directory "custom-pkgs/")))
-(require 'git)
 
 ;; anaconda-mode (python)
 ;; (add-hook 'python-mode-hook 'anaconda-mode)
@@ -124,7 +119,7 @@
   (when opam-exe
     (message "Found opam: %s" opam-exe)
     (condition-case err
-        (let* ((share-dir (file-name-as-directory (car (process-lines "opam" "config" "var" "share"))))
+        (let* ((share-dir (file-name-as-directory (car (process-lines "opam" "var" "share"))))
                (site-dir (file-name-as-directory (concat share-dir "emacs/site-lisp")))
 	       (merlin-el-path (concat site-dir "merlin.el"))
 	       (utop-el-path (concat site-dir "utop.el"))
@@ -164,9 +159,12 @@
     (load-file pg-site-file)))
 
 ;; lsp
-(require 'lsp-mode)
-(add-hook 'rust-mode-hook #'lsp-deferred)
-(add-hook 'python-mode-hook #'lsp-deferred)
+;; (require 'lsp-mode)
+;; (add-hook 'rust-mode-hook #'lsp-deferred)
+;; (add-hook 'python-mode-hook #'lsp-deferred)
+(require 'eglot)
+(add-to-list 'eglot-server-programs
+             '(rust-mode . ("rustup" "run" "nightly" "rust-analyzer")))
 
 ;; yasnippet
 (require 'yasnippet)
