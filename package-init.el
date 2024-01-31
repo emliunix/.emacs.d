@@ -4,9 +4,9 @@
 (global-company-mode)
 
 ;; helm
-(require 'helm-config)
+;; (require 'helm-config)
 ; starts helm at startup
-(helm-mode 1)
+;; (helm-mode 1)
 ;; bind helm-M-x to M-x
 (global-set-key (kbd "M-x") 'helm-M-x)
 ;; bind helm-find-files to C-x C-f
@@ -169,3 +169,25 @@
 ;; yasnippet
 (require 'yasnippet)
 (yas-global-mode t)
+
+;; lean4
+(use-package lean4-mode
+  :straight (lean4-mode
+	     :type git
+	     :host github
+	     :repo "leanprover/lean4-mode"
+	     :files ("*.el" "data"))
+  ;; to defer loading the package until required
+  :commands (lean4-mode))
+
+;; copilot
+(use-package copilot
+  :straight (:host github
+             :repo "copilot-emacs/copilot.el"
+             :files ("dist" "*.el"))
+  :ensure t)
+
+;; doom modeline
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
