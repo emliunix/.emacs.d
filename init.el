@@ -21,12 +21,14 @@
    '(("melpa" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
      ("gnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
  '(package-selected-packages
-   '(flycheck magit all-the-icons yasnippet company rainbow-delimiters project eglot lsp-haskell lsp-python-ms pretty-mode helm-idris idris-mode restclient restclient-helm auctex dockerfile-mode emmet-mode geiser helm helm-projectile json-mode markdown-mode+ paredit projectile rust-mode sml-mode syntax-subword toml-mode yaml-mode zenburn-theme))
+   '(flycheck magit yasnippet company rainbow-delimiters project pretty-mode restclient restclient-helm auctex dockerfile-mode emmet-mode geiser helm helm-projectile json-mode markdown-mode+ paredit projectile rust-mode sml-mode syntax-subword toml-mode yaml-mode zenburn-theme))
  '(projectile-completion-system 'helm)
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
  '(size-indication-mode t)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(read-process-output-max 2097152)
+ '(gc-cons-threshold 100000000))
 
 ;; load user customs
 (let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))

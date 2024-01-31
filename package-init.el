@@ -162,13 +162,35 @@
 ;; (require 'lsp-mode)
 ;; (add-hook 'rust-mode-hook #'lsp-deferred)
 ;; (add-hook 'python-mode-hook #'lsp-deferred)
-(require 'eglot)
-(add-to-list 'eglot-server-programs
-             '(rust-mode . ("rustup" "run" "nightly" "rust-analyzer")))
+;; (require 'eglot)
+;; (add-to-list 'eglot-server-programs
+;;              '(rust-mode . ("rustup" "run" "nightly" "rust-analyzer")))
 
 ;; yasnippet
 (require 'yasnippet)
 (yas-global-mode t)
+
+;; lsp-mode
+(use-package lsp-mode
+  :init
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         ;; (python-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+;; optionally
+(use-package lsp-ui :commands lsp-ui-mode)
+;; if you are helm user
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+;; lsp python
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))
 
 ;; lean4
 (use-package lean4-mode
