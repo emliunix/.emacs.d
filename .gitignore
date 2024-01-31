@@ -1,4 +1,10 @@
 /elpa/
 *~
 /auto-save-list/
-/anaconda-mode/
+/anaconda-mode//my-custom.el
+/straight
+/transient
+/projectile-bookmarks.eld
+/history
+/.lsp-session-v1
+/my-custom.el
