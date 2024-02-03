@@ -20,8 +20,6 @@
  '(package-archives
    '(("melpa" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
      ("gnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
- '(package-selected-packages
-   '(flycheck magit yasnippet company rainbow-delimiters project pretty-mode restclient restclient-helm auctex dockerfile-mode emmet-mode geiser helm helm-projectile json-mode markdown-mode+ paredit projectile rust-mode sml-mode syntax-subword toml-mode yaml-mode zenburn-theme))
  '(projectile-completion-system 'helm)
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
@@ -56,10 +54,112 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
 
-;; elpa mirror backup in case tuna is not accessible
+;; Elpa mirror backup in case tuna is not accessible
 ;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 ;;                          ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+(use-package flycheck
+  :straight t)
+(use-package magit
+  :straight t)
+(use-package yasnippet
+  :straight t)
+(use-package company
+  :straight t)
+(use-package rainbow-delimiters
+  :straight t)
+(use-package pretty-mode
+  :straight t)
+(use-package restclient
+  :straight t)
+(use-package restclient-helm
+  :straight t)
+(use-package auctex
+  :straight t)
+(use-package dockerfile-mode
+  :straight t)
+(use-package emmet-mode
+  :straight t)
+(use-package geiser
+  :straight t)
+(use-package helm
+  :straight t)
+(use-package helm-projectile
+  :straight t)
+(use-package json-mode
+  :straight t)
+(use-package markdown-mode+
+  :straight t)
+(use-package paredit
+  :straight t)
+(use-package projectile
+  :straight t)
+(use-package rust-mode
+  :straight t)
+(use-package sml-mode
+  :straight t)
+(use-package syntax-subword
+  :straight t)
+(use-package toml-mode
+  :straight t)
+(use-package yaml-mode
+  :straight t)
+(use-package zenburn-theme
+  :straight t)
+
+;; lsp-mode
+(use-package lsp-mode
+  :straight t
+  :init
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         ;; (python-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+;; optionally
+(use-package lsp-ui
+  :straight t
+  :commands lsp-ui-mode)
+;; if you are helm user
+(use-package helm-lsp
+  :straight t
+  :commands helm-lsp-workspace-symbol)
+(use-package lsp-treemacs
+  :straight t
+  :commands lsp-treemacs-errors-list)
+
+;; lsp python
+(use-package lsp-pyright
+  :straight t
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))
+
+;; lean4
+(use-package lean4-mode
+  :straight (lean4-mode
+	     :type git
+	     :host github
+	     :repo "leanprover/lean4-mode"
+	     :files ("*.el" "data"))
+  ;; to defer loading the package until required
+  :commands (lean4-mode))
+
+;; copilot
+(use-package copilot
+  :straight (:host github
+             :repo "copilot-emacs/copilot.el"
+             :files ("dist" "*.el"))
+  :ensure t)
+
+;; doom modeline
+(use-package doom-modeline
+  :straight t
+  :ensure t
+  :init (doom-modeline-mode 1))
 
 ;; highlight parenthesis
 (show-paren-mode 1)
