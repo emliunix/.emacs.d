@@ -112,10 +112,11 @@
 (use-package lsp-mode
   :straight t
   :init
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         ;; (python-mode . lsp)
-         ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
+  ;; :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+  ;;        ;; (python-mode . lsp)
+  ;;        ;; if you want which-key integration
+  ;;        ;; (lsp-mode . lsp-enable-which-key-integration)
+  ;;        )
   :commands lsp)
 
 ;; optionally
@@ -129,14 +130,19 @@
 (use-package lsp-treemacs
   :straight t
   :commands lsp-treemacs-errors-list)
+;; ivy
+(use-package ivy
+  :straight t)
+(use-package lsp-ivy
+  :straight t)
 
 ;; lsp python
 (use-package lsp-pyright
   :straight t
   :ensure t
   :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))
+                         (require 'lsp-pyright)
+                         (lsp))))
 
 ;; lean4
 (use-package lean4-mode
@@ -153,6 +159,8 @@
   :straight (:host github
              :repo "copilot-emacs/copilot.el"
              :files ("dist" "*.el"))
+  :hook (prog-mode . copilot-mode)
+  :bind (("<tab>" . copilot-accept-completion))
   :ensure t)
 
 ;; doom modeline
