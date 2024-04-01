@@ -151,13 +151,6 @@
 	      (load tuareg-site-file-el-path))))
         (error (message "Failed initializing OCaml env: %s: %s" (car err) (cdr err))))))
 
-
-;; Proof General
-(let ((pg-site-file (concat (file-name-as-directory user-emacs-directory) "lisp/PG/generic/proof-site.el")))
-  (when (file-exists-p pg-site-file)
-    (message "proof-site.el found: %s" pg-site-file)
-    (load-file pg-site-file)))
-
 ;; lsp
 ;; (require 'lsp-mode)
 ;; (add-hook 'rust-mode-hook #'lsp-deferred)
