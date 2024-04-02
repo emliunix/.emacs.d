@@ -14,7 +14,7 @@
  '(frame-background-mode 'dark)
  '(indent-tabs-mode nil)
  '(lsp-keymap-prefix "C-c l")
- '(lsp-rust-analyzer-server-display-inlay-hints t)
+ '(lsp-inlay-hint-enable t)
  '(lsp-rust-server 'rust-analyzer)
  '(lsp-semantic-highlighting :deferred)
  '(package-archives
@@ -32,11 +32,6 @@
 (let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
   (when (file-exists-p file-custom-el)
     (load file-custom-el)))
-
-;; package-init
-(add-hook 'after-init-hook
-          (lambda ()
-	    (load (concat (file-name-as-directory user-emacs-directory) "package-init.el"))))
 
 ;; straight.el
 (defvar bootstrap-version)
@@ -59,16 +54,20 @@
 ;; Elpa mirror backup in case tuna is not accessible
 ;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 ;;                          ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+
+;; use p-list to loop these packages and call use-package
+
 (use-package flycheck
   :straight t)
-(use-package magit
-  :straight t)
 (use-package yasnippet
-  :straight t)
+  :straight t
+  :init (yas-global-mode t))
 (use-package company
-  :straight t)
+  :straight t
+  :init (global-company-mode t))
 (use-package rainbow-delimiters
-  :straight t)
+  :straight t
+  :hook (prog-mode . rainbow-delimiters-mode))
 (use-package pretty-mode
   :straight t)
 (use-package restclient
@@ -80,10 +79,9 @@
 (use-package dockerfile-mode
   :straight t)
 (use-package emmet-mode
-  :straight t)
+  :straight t
+  :hook ((html-mode css-mode) . emmet-mode))
 (use-package geiser
-  :straight t)
-(use-package helm
   :straight t)
 (use-package helm-projectile
   :straight t)
@@ -92,9 +90,11 @@
 (use-package markdown-mode+
   :straight t)
 (use-package paredit
-  :straight t)
+  :straight t
+  :hook ((lisp-mode emacs-lisp-mode) . paredit-mode))
 (use-package projectile
-  :straight t)
+  :straight t
+  :init (projectile-mode))
 (use-package rust-mode
   :straight t)
 (use-package sml-mode
@@ -106,12 +106,25 @@
 (use-package yaml-mode
   :straight t)
 (use-package zenburn-theme
-  :straight t)
+  :straight t
+  :init (if window-system
+            (load-theme 'zenburn t)))
+
+(use-package helm
+  :straight t
+  :init (helm-mode 1)
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         ("C-x c C-x C-f" . find-file)))
+
+(use-package magit
+  :straight t
+  :commands magit-status)
 
 ;; lsp-mode
 (use-package lsp-mode
   :straight t
-  :init
+  ;; :init
   ;; :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
   ;;        ;; (python-mode . lsp)
   ;;        ;; if you want which-key integration
@@ -152,15 +165,20 @@
 	     :repo "leanprover/lean4-mode"
 	     :files ("*.el" "data"))
   ;; to defer loading the package until required
-  :commands (lean4-mode))
+  :commands lean4-mode)
+
+(use-package geiser-chez
+  :straight t)
+(use-package geiser
+  :straight t)
 
 ;; copilot
 (use-package copilot
   :straight (:host github
-             :repo "copilot-emacs/copilot.el"
-             :files ("dist" "*.el"))
+                   :repo "copilot-emacs/copilot.el"
+                   :files ("dist" "*.el"))
   :hook (prog-mode . copilot-mode)
-  :bind (("<tab>" . copilot-accept-completion))
+  :bind (("C-<tab>" . copilot-accept-completion))
   :ensure t)
 
 ;; doom modeline
@@ -184,6 +202,40 @@
   (interactive)
   (find-file (concat (file-name-as-directory user-emacs-directory) "init.el")))
 
-(defun open-package-init-file ()
-  (interactive)
-  (find-file (concat (file-name-as-directory user-emacs-directory) "package-init.el")))
+;; OCaml setup
+;; (autoload 'utop "~/.emacs.d/utop.el" "Toplevel for OCaml" t)
+(let ((opam-exe (executable-find "opam")))
+  (when opam-exe
+    (message "Found opam: %s" opam-exe)
+    (condition-case err
+        (let* ((share-dir (file-name-as-directory (car (process-lines "opam" "var" "share"))))
+               (site-dir (file-name-as-directory (concat share-dir "emacs/site-lisp")))
+	       (merlin-el-path (concat site-dir "merlin.el"))
+	       (utop-el-path (concat site-dir "utop.el"))
+	       (caml-el-path (concat site-dir "caml.el"))
+	       (tuareg-site-file-el-path (concat site-dir "tuareg-site-file.el")))
+          ;; add emacs site-lisp in opam share directory
+          (when (file-exists-p site-dir)
+            (push site-dir load-path)
+            ;; (print (concat "merlin.el " merlin-el-path))
+            ;; (print (concat "utop.el " utop-el-path))
+            (when (file-exists-p merlin-el-path)
+	      ;; load merlin
+              (message "merlin.el found: %s" merlin-el-path)
+	      (setq merlin-command 'opam)
+	      (autoload 'merlin-mode "merlin" "Merlin mode" t)
+	      (add-hook 'tuareg-mode-hook 'merlin-mode))
+            (when (file-exists-p utop-el-path)
+	      ;; load utop
+              (message "utop.el found: %s" utop-el-path)
+	      (autoload 'utop "utop.el" "Toplevel for OCaml" t))
+            (when (file-exists-p caml-el-path)
+	      ;; load caml mode
+              (message "caml.el found: %s" caml-el-path)
+	      (autoload 'caml "caml.el" "Caml mode" t)
+              (if window-system (require 'caml-font)))
+            (when (file-exists-p tuareg-site-file-el-path)
+	      ;; load tuareg
+              (message "tuareg-site-file.el found: %s" tuareg-site-file-el-path)
+	      (load tuareg-site-file-el-path))))
+        (error (message "Failed initializing OCaml env: %s: %s" (car err) (cdr err))))))
