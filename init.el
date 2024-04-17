@@ -10,23 +10,31 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("76c5b2592c62f6b48923c00f97f74bcb7ddb741618283bdb2be35f3c0e1030e3" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default))
+   '("f079ef5189f9738cf5a2b4507bcaf83138ad22d9c9e32a537d61c9aae25502ef"
+     "76c5b2592c62f6b48923c00f97f74bcb7ddb741618283bdb2be35f3c0e1030e3"
+     "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109"
+     default))
  '(frame-background-mode 'dark)
+ '(gc-cons-threshold 100000000)
  '(indent-tabs-mode nil)
- '(lsp-keymap-prefix "C-c l")
  '(lsp-inlay-hint-enable t)
+ '(lsp-keymap-prefix "C-c l")
  '(lsp-rust-server 'rust-analyzer)
  '(lsp-semantic-highlighting :deferred)
  '(package-archives
    '(("melpa" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
      ("gnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
  '(projectile-completion-system 'helm)
+ '(read-process-output-max 2097152 t)
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
  '(size-indication-mode t)
- '(tool-bar-mode nil)
- '(read-process-output-max 2097152)
- '(gc-cons-threshold 100000000))
+ '(tool-bar-mode nil))
+
+(add-hook 'after-init-hook
+          (lambda ()
+            (custom-set-variables
+             '(warning-suppress-types . ((copilot copilot-no-mode-indent))))))
 
 ;; load user customs
 (let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
@@ -81,8 +89,6 @@
 (use-package emmet-mode
   :straight t
   :hook ((html-mode css-mode) . emmet-mode))
-(use-package geiser
-  :straight t)
 (use-package helm-projectile
   :straight t)
 (use-package json-mode
@@ -91,7 +97,7 @@
   :straight t)
 (use-package paredit
   :straight t
-  :hook ((lisp-mode emacs-lisp-mode) . paredit-mode))
+  :hook ((lisp-mode emacs-lisp-mode scheme-mode) . paredit-mode))
 (use-package projectile
   :straight t
   :init (projectile-mode))
@@ -124,7 +130,7 @@
 ;; lsp-mode
 (use-package lsp-mode
   :straight t
-  ;; :init
+  :init
   ;; :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
   ;;        ;; (python-mode . lsp)
   ;;        ;; if you want which-key integration
@@ -168,6 +174,8 @@
   :commands lean4-mode)
 
 (use-package geiser-chez
+  :straight t)
+(use-package geiser-racket
   :straight t)
 (use-package geiser
   :straight t)
@@ -239,3 +247,8 @@
               (message "tuareg-site-file.el found: %s" tuareg-site-file-el-path)
 	      (load tuareg-site-file-el-path))))
         (error (message "Failed initializing OCaml env: %s: %s" (car err) (cdr err))))))
+
+;; emoji
+(when (member "Noto Color Emoji" (font-family-list))
+  (set-fontset-font
+    t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
