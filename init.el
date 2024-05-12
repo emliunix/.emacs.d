@@ -30,12 +30,19 @@
  '(scroll-bar-mode nil)
  '(size-indication-mode t)
  '(tool-bar-mode nil))
+ '(url-proxy-services
+   '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
+     ("http" . "localhost:8899") ("https" . "localhost:8899")))
+ '(warning-suppress-log-types
+   '(((copilot copilot-no-mode-indent))
+     ((copilot copilot-exceeds-max-char))))
 
 (add-hook 'after-init-hook
           (lambda ()
             (custom-set-variables
-             '(warning-suppress-types . ((copilot copilot-no-mode-indent))))))
-
+             '(warning-suppress-types 
+                '(((copilot copilot-no-mode-indent))
+                  ((copilot copilot-exceeds-max-char)))))))
 ;; load user customs
 (let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
   (when (file-exists-p file-custom-el)
@@ -89,8 +96,6 @@
 (use-package emmet-mode
   :straight t
   :hook ((html-mode css-mode) . emmet-mode))
-(use-package helm-projectile
-  :straight t)
 (use-package json-mode
   :straight t)
 (use-package markdown-mode+
@@ -122,6 +127,8 @@
   :bind (("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)
          ("C-x c C-x C-f" . find-file)))
+(use-package helm-projectile
+  :straight t)
 
 (use-package magit
   :straight t
@@ -131,6 +138,7 @@
 (use-package lsp-mode
   :straight t
   :init
+  ;; :hook (prog-mode . lsp-deferred)
   ;; :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
   ;;        ;; (python-mode . lsp)
   ;;        ;; if you want which-key integration
@@ -194,6 +202,19 @@
   :straight t
   :ensure t
   :init (doom-modeline-mode 1))
+
+(use-package proof-general
+  :straight t
+  :ensure t)
+
+(use-package company-coq
+  :straight t
+  :ensure t
+  :hook (coq-mode . company-coq-mode))
+
+(use-package gptel
+  :straight t
+  :ensure t)
 
 ;; highlight parenthesis
 (show-paren-mode 1)
