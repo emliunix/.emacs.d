@@ -29,7 +29,7 @@
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
  '(size-indication-mode t)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
  '(url-proxy-services
    '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
      ("http" . "localhost:8899") ("https" . "localhost:8899")))
@@ -185,11 +185,12 @@
   :straight (:host github
                    :repo "copilot-emacs/copilot.el"
                    :files ("dist" "*.el"))
-  :custom ((warning-suppress-types
-            ((Copilot Copilot-No-Mode-Indent)
-             (Copilot Copilot-Exceeds-Max-Char)))
-           (warning-suppress-log-types
-            ((copilot copilot-no-mode-indent))))
+  :custom ((warning-suppress-log-types
+            '(((copilot copilot-no-mode-indent))
+              ((copilot copilot-exceeds-max-char))))
+           (warning-suppress-types
+            '(((copilot copilot-no-mode-indent))
+              ((copilot copilot-exceeds-max-char)))))
   :hook (prog-mode . copilot-mode)
   :bind (("C-<tab>" . copilot-accept-completion))
   :ensure t)
