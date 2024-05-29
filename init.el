@@ -33,16 +33,7 @@
  '(url-proxy-services
    '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
      ("http" . "localhost:8899") ("https" . "localhost:8899")))
- '(warning-suppress-log-types
-   '(((copilot copilot-no-mode-indent))
-     ((copilot copilot-exceeds-max-char))))
 
-(add-hook 'after-init-hook
-          (lambda ()
-            (custom-set-variables
-             '(warning-suppress-types 
-                '(((copilot copilot-no-mode-indent))
-                  ((copilot copilot-exceeds-max-char)))))))
 ;; load user customs
 (let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
   (when (file-exists-p file-custom-el)
@@ -99,10 +90,12 @@
 (use-package json-mode
   :straight t)
 (use-package markdown-mode+
-  :straight t)
-(use-package paredit
   :straight t
-  :hook ((lisp-mode emacs-lisp-mode scheme-mode) . paredit-mode))
+  :custom ((markdown-enable-math t)))
+;; (use-package paredit
+;;   :straight t
+;;   :hook ((lisp-mode emacs-lisp-mode scheme-mode) . paredit-mode))
+
 (use-package projectile
   :straight t
   :init (projectile-mode))
@@ -137,7 +130,6 @@
 ;; lsp-mode
 (use-package lsp-mode
   :straight t
-  :init
   ;; :hook (prog-mode . lsp-deferred)
   ;; :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
   ;;        ;; (python-mode . lsp)
@@ -193,6 +185,11 @@
   :straight (:host github
                    :repo "copilot-emacs/copilot.el"
                    :files ("dist" "*.el"))
+  :custom ((warning-suppress-types
+            ((Copilot Copilot-No-Mode-Indent)
+             (Copilot Copilot-Exceeds-Max-Char)))
+           (warning-suppress-log-types
+            ((copilot copilot-no-mode-indent))))
   :hook (prog-mode . copilot-mode)
   :bind (("C-<tab>" . copilot-accept-completion))
   :ensure t)
