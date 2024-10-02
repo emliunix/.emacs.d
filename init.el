@@ -1,8 +1,4 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(package-initialize)
+;(package-initialize)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -16,8 +12,10 @@
      default))
  '(frame-background-mode 'dark)
  '(gc-cons-threshold 100000000)
+ '(geiser-chez-binary "chez")
  '(indent-tabs-mode nil)
  '(lsp-inlay-hint-enable t)
+ '(lsp-inlay-hints t)
  '(lsp-keymap-prefix "C-c l")
  '(lsp-rust-server 'rust-analyzer)
  '(lsp-semantic-highlighting :deferred)
@@ -27,6 +25,7 @@
  '(projectile-completion-system 'helm)
  '(read-process-output-max 2097152 t)
  '(ring-bell-function 'ignore)
+ '(safe-local-variable-values '((setq my-test-var 'hello)))
  '(scroll-bar-mode nil)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
@@ -37,6 +36,7 @@
 ;; load user customs
 (let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
   (when (file-exists-p file-custom-el)
+    (message "Load my-custom.el")
     (load file-custom-el)))
 
 ;; straight.el
@@ -60,8 +60,6 @@
 ;; Elpa mirror backup in case tuna is not accessible
 ;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 ;;                          ("melpa" . "http://elpa.emacs-china.org/melpa/")))
-
-;; use p-list to loop these packages and call use-package
 
 (use-package flycheck
   :straight t)
