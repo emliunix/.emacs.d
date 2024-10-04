@@ -31,7 +31,7 @@
  '(tool-bar-mode nil)
  '(url-proxy-services
    '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
-     ("http" . "localhost:8899") ("https" . "localhost:8899")))
+     ("http" . "localhost:8899") ("https" . "localhost:8899"))))
 
 ;; load user customs
 (let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
@@ -212,10 +212,19 @@
   :straight t
   :ensure t)
 
+(use-package haskell-mode
+  :straight t
+  :ensure t)
+
+(use-package lsp-haskell
+  :straight t
+  :ensure t
+  :hook (haskell-mode . lsp))
+
 ;; highlight parenthesis
 (show-paren-mode 1)
 ; use syntax-subword instead
-(global-subword-mode 1)
+;; (global-subword-mode 1)
 ;; electric pair mode
 (electric-pair-mode 1)
 ;; eldoc mode
