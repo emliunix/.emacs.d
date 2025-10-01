@@ -204,15 +204,6 @@
 (use-package hcl-mode
   :ensure t)
 
-(use-package haskell-mode
-  :straight t
-  :ensure t)
-
-(use-package lsp-haskell
-  :straight t
-  :ensure t
-  :hook (haskell-mode . lsp))
-
 (use-package which-key
   :init (which-key-mode 1))
 
