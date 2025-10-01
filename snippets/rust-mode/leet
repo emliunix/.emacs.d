@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: leetcode template
+# key: leet
+# --
+pub struct Solution;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    pub fn test1() {
+    }
+}
