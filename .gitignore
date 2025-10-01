@@ -8,3 +8,7 @@
 /history
 /.lsp-session-v1
 /my-custom.el
+/eln-cache/
+/projects
+/.cache
+/tramp

@@ -1,31 +1,48 @@
-;(package-initialize)
+(package-initialize)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("f079ef5189f9738cf5a2b4507bcaf83138ad22d9c9e32a537d61c9aae25502ef"
-     "76c5b2592c62f6b48923c00f97f74bcb7ddb741618283bdb2be35f3c0e1030e3"
-     "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109"
-     default))
+ '(custom-safe-themes '(default))
  '(frame-background-mode 'dark)
  '(gc-cons-threshold 100000000)
  '(geiser-chez-binary "chez")
  '(indent-tabs-mode nil)
  '(lsp-inlay-hint-enable t)
  '(lsp-inlay-hints t)
+ '(haskell-process-show-overlays nil)
+ '(indent-tabs-mode nil)
+ '(lsp-inlay-hint-enable nil)
  '(lsp-keymap-prefix "C-c l")
+ '(lsp-lens-enable nil)
  '(lsp-rust-server 'rust-analyzer)
  '(lsp-semantic-highlighting :deferred)
  '(package-archives
-   '(("melpa" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+   '(("nongnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")
+     ("melpa" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
      ("gnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
+ '(package-selected-packages
+   '(auctex company-coq copilot dockerfile-mode doom-modeline emmet-mode
+            flycheck geiser-chez geiser-racket gptel haskell-mode
+            hcl-mode helm-lsp helm-projectile json-mode lean4-mode
+            lsp-haskell lsp-ivy lsp-pyright lsp-treemacs lsp-ui magit
+            paredit pretty-mode proof-general rainbow-delimiters
+            restclient-helm rust-mode sml-mode syntax-subword
+            toml-mode yaml-mode zenburn-theme))
+ '(package-vc-selected-packages
+   '((lean4-mode :url
+                 "git@github.com:leanprover-community/lean4-mode.git")))
  '(projectile-completion-system 'helm)
  '(read-process-output-max 2097152 t)
  '(ring-bell-function 'ignore)
  '(safe-local-variable-values '((setq my-test-var 'hello)))
+ '(scroll-bar-mode nil)
+ '(size-indication-mode t)
+ '(tool-bar-mode nil)
+ '(safe-local-variable-directories '("/Users/emliunix/OneDrive/myobsidian/"))
+ '(safe-local-variable-values '((tab-size . 4)))
  '(scroll-bar-mode nil)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
@@ -39,95 +56,71 @@
     (message "Load my-custom.el")
     (load file-custom-el)))
 
-;; straight.el
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name
-        "straight/repos/straight.el/bootstrap.el"
-        (or (bound-and-true-p straight-base-dir)
-            user-emacs-directory)))
-      (bootstrap-version 7))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-(straight-use-package 'use-package)
-
 ;; Elpa mirror backup in case tuna is not accessible
 ;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 ;;                          ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 
-(use-package flycheck
-  :straight t)
-(use-package yasnippet
-  :straight t
-  :init (yas-global-mode t))
-(use-package company
-  :straight t
-  :init (global-company-mode t))
-(use-package rainbow-delimiters
-  :straight t
-  :hook (prog-mode . rainbow-delimiters-mode))
-(use-package pretty-mode
-  :straight t)
-(use-package restclient
-  :straight t)
-(use-package restclient-helm
-  :straight t)
-(use-package auctex
-  :straight t)
-(use-package dockerfile-mode
-  :straight t)
-(use-package emmet-mode
-  :straight t
-  :hook ((html-mode css-mode) . emmet-mode))
-(use-package json-mode
-  :straight t)
-(use-package markdown-mode+
-  :straight t
-  :custom ((markdown-enable-math t)))
-;; (use-package paredit
-;;   :straight t
-;;   :hook ((lisp-mode emacs-lisp-mode scheme-mode) . paredit-mode))
-
-(use-package projectile
-  :straight t
-  :init (projectile-mode))
-(use-package rust-mode
-  :straight t)
-(use-package sml-mode
-  :straight t)
-(use-package syntax-subword
-  :straight t)
-(use-package toml-mode
-  :straight t)
-(use-package yaml-mode
-  :straight t)
-(use-package zenburn-theme
-  :straight t
-  :init (if window-system
-            (load-theme 'zenburn t)))
-
 (use-package helm
-  :straight t
+  :ensure t
   :init (helm-mode 1)
   :bind (("M-x" . helm-M-x)
+         ("C-x c M-x" . M-x)
          ("C-x C-f" . helm-find-files)
          ("C-x c C-x C-f" . find-file)))
-(use-package helm-projectile
-  :straight t)
 
+(use-package flycheck
+  :ensure t)
+(use-package yasnippet
+  :ensure t
+  :init (yas-global-mode t))
+(use-package company
+  :ensure t
+  :init (global-company-mode t))
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
+(use-package pretty-mode
+  :ensure t)
+(use-package restclient
+  :ensure t)
+(use-package restclient-helm
+  :ensure t)
+(use-package auctex
+  :ensure t)
+(use-package dockerfile-mode
+  :ensure t)
+(use-package emmet-mode
+  :hook ((html-mode css-mode) . emmet-mode)
+  :ensure t)
+(use-package json-mode
+  :ensure t)
+(use-package paredit
+  :ensure t
+  :hook ((lisp-mode emacs-lisp-mode scheme-mode) . paredit-mode))
+(use-package projectile
+  :ensure t
+  :init (projectile-mode))
+(use-package sml-mode
+  :ensure t)
+(use-package syntax-subword
+  :ensure t)
+(use-package toml-mode
+  :ensure t)
+(use-package yaml-mode
+  :ensure t)
+(use-package zenburn-theme
+  :ensure t
+  :init (if window-system
+            (load-theme 'zenburn t)))
+(use-package helm-projectile
+  :ensure t)
 (use-package magit
-  :straight t
+  :ensure t
   :commands magit-status)
 
 ;; lsp-mode
 (use-package lsp-mode
-  :straight t
+  :ensure t
   ;; :hook (prog-mode . lsp-deferred)
   ;; :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
   ;;        ;; (python-mode . lsp)
@@ -138,24 +131,27 @@
 
 ;; optionally
 (use-package lsp-ui
-  :straight t
+  :ensure t
   :commands lsp-ui-mode)
 ;; if you are helm user
 (use-package helm-lsp
-  :straight t
+  :ensure t
   :commands helm-lsp-workspace-symbol)
 (use-package lsp-treemacs
-  :straight t
+  :ensure t
   :commands lsp-treemacs-errors-list)
 ;; ivy
 (use-package ivy
-  :straight t)
+  :ensure t)
 (use-package lsp-ivy
-  :straight t)
+  :ensure t)
+
+(use-package rust-mode
+  :ensure t
+  :hook (rust-mode . lsp))
 
 ;; lsp python
 (use-package lsp-pyright
-  :straight t
   :ensure t
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
@@ -163,53 +159,49 @@
 
 ;; lean4
 (use-package lean4-mode
-  :straight (lean4-mode
-	     :type git
-	     :host github
-	     :repo "leanprover/lean4-mode"
-	     :files ("*.el" "data"))
+  :vc (:url "git@github.com:leanprover-community/lean4-mode.git")
+  :ensure t
   ;; to defer loading the package until required
   :commands lean4-mode)
 
 (use-package geiser-chez
-  :straight t)
+  :ensure t)
 (use-package geiser-racket
-  :straight t)
+  :ensure t)
 (use-package geiser
-  :straight t)
+  :ensure t)
 
 ;; copilot
 (use-package copilot
-  :straight (:host github
-                   :repo "copilot-emacs/copilot.el"
-                   :files ("dist" "*.el"))
-  :custom ((warning-suppress-log-types
-            '(((copilot copilot-no-mode-indent))
-              ((copilot copilot-exceeds-max-char))))
-           (warning-suppress-types
-            '(((copilot copilot-no-mode-indent))
-              ((copilot copilot-exceeds-max-char)))))
+;;   :custom ((warning-suppress-types
+;;             ((Copilot Copilot-No-Mode-Indent)
+;;              (Copilot Copilot-Exceeds-Max-Char)))
+;;            (warning-suppress-log-types
+;;             ((copilot copilot-no-mode-indent))))
   :hook (prog-mode . copilot-mode)
   :bind (("C-<tab>" . copilot-accept-completion))
   :ensure t)
 
 ;; doom modeline
 (use-package doom-modeline
-  :straight t
   :ensure t
   :init (doom-modeline-mode 1))
 
 (use-package proof-general
-  :straight t
   :ensure t)
 
+(use-package haskell-mode
+  :ensure t)
+
+(use-package lsp-haskell
+  :ensure t
+  :hook (haskell-mode . lsp))
+
 (use-package company-coq
-  :straight t
   :ensure t
   :hook (coq-mode . company-coq-mode))
 
-(use-package gptel
-  :straight t
+(use-package hcl-mode
   :ensure t)
 
 (use-package haskell-mode
@@ -220,6 +212,9 @@
   :straight t
   :ensure t
   :hook (haskell-mode . lsp))
+
+(use-package which-key
+  :init (which-key-mode 1))
 
 ;; highlight parenthesis
 (show-paren-mode 1)
@@ -277,4 +272,4 @@
 ;; emoji
 (when (member "Noto Color Emoji" (font-family-list))
   (set-fontset-font
-    t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
+   t 'symbol (font-spec :family "Noto Color Emoji") nil 'prepend))
