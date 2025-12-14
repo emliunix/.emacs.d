@@ -9,26 +9,25 @@
  '(frame-background-mode 'dark)
  '(gc-cons-threshold 100000000)
  '(geiser-chez-binary "chez")
- '(indent-tabs-mode nil)
- '(lsp-inlay-hint-enable t)
- '(lsp-inlay-hints t)
  '(haskell-process-show-overlays nil)
  '(indent-tabs-mode nil)
  '(lsp-inlay-hint-enable nil)
+ '(lsp-inlay-hints t)
  '(lsp-keymap-prefix "C-c l")
  '(lsp-lens-enable nil)
  '(lsp-rust-server 'rust-analyzer)
+ '(lsp-copilot-enabled t)
  '(lsp-semantic-highlighting :deferred)
  '(package-archives
    '(("nongnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")
      ("melpa" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
      ("gnu" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
  '(package-selected-packages
-   '(auctex company-coq copilot dockerfile-mode doom-modeline emmet-mode
-            flycheck geiser-chez geiser-racket gptel haskell-mode
-            hcl-mode helm-lsp helm-projectile json-mode lean4-mode
-            lsp-haskell lsp-ivy lsp-pyright lsp-treemacs lsp-ui magit
-            paredit pretty-mode proof-general rainbow-delimiters
+   '(auctex company-coq dockerfile-mode doom-modeline emmet-mode flycheck
+            geiser-chez geiser-racket gptel haskell-mode hcl-mode
+            helm-lsp helm-projectile json-mode lean4-mode lsp-haskell
+            lsp-ivy lsp-pyright lsp-treemacs lsp-ui magit paredit
+            pretty-mode proof-general rainbow-delimiters
             restclient-helm rust-mode sml-mode syntax-subword
             toml-mode yaml-mode zenburn-theme))
  '(package-vc-selected-packages
@@ -37,10 +36,6 @@
  '(projectile-completion-system 'helm)
  '(read-process-output-max 2097152 t)
  '(ring-bell-function 'ignore)
- '(safe-local-variable-values '((setq my-test-var 'hello)))
- '(scroll-bar-mode nil)
- '(size-indication-mode t)
- '(tool-bar-mode nil)
  '(safe-local-variable-directories '("/Users/emliunix/OneDrive/myobsidian/"))
  '(safe-local-variable-values '((tab-size . 4)))
  '(scroll-bar-mode nil)
@@ -48,7 +43,8 @@
  '(tool-bar-mode nil)
  '(url-proxy-services
    '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
-     ("http" . "localhost:8899") ("https" . "localhost:8899"))))
+     ("http" . "192.168.50.100:7890")
+     ("https" . "192.168.50.100:7890"))))
 
 ;; load user customs
 (let ((file-custom-el (concat (file-name-as-directory user-emacs-directory) "my-custom.el")))
@@ -172,15 +168,15 @@
   :ensure t)
 
 ;; copilot
-(use-package copilot
-;;   :custom ((warning-suppress-types
-;;             ((Copilot Copilot-No-Mode-Indent)
-;;              (Copilot Copilot-Exceeds-Max-Char)))
-;;            (warning-suppress-log-types
-;;             ((copilot copilot-no-mode-indent))))
-  :hook (prog-mode . copilot-mode)
-  :bind (("C-<tab>" . copilot-accept-completion))
-  :ensure t)
+;; (use-package copilot
+;; ;;   :custom ((warning-suppress-types
+;; ;;             ((Copilot Copilot-No-Mode-Indent)
+;; ;;              (Copilot Copilot-Exceeds-Max-Char)))
+;; ;;            (warning-suppress-log-types
+;; ;;             ((copilot copilot-no-mode-indent))))
+;;   :hook (prog-mode . copilot-mode)
+;;   :bind (("C-<tab>" . copilot-accept-completion))
+;;   :ensure t)
 
 ;; doom modeline
 (use-package doom-modeline
